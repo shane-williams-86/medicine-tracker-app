@@ -5,6 +5,7 @@ import Signup from "../views/Signup.vue";
 import Login from "../views/Login.vue";
 import Logout from "../views/Logout.vue";
 import UsersShow from "../views/UsersShow.vue";
+import PatientsIndex from "../views/PatientsIndex.vue";
 import PatientsShow from "../views/PatientsShow.vue";
 
 Vue.use(VueRouter);
@@ -23,6 +24,7 @@ const routes = [
   { path: "/login", name: "login", component: Login },
   { path: "/logout", name: "logout", component: Logout },
   { path: "/users/me", name: "users-show", component: UsersShow },
+  { path: "/patients", name: "patients-index", component: PatientsIndex },
   { path: "/patients/:id", name: "patients-show", component: PatientsShow },
 ];
 
