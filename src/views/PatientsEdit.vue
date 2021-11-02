@@ -7,10 +7,10 @@
       </ul>
       Name:
       <input type="text" v-model="patient.name" /><br />
-      Notes:
-      <input type="text" v-model="patient.notes" /><br />
       Image Url:
       <input type="text" v-model="patient.image_url" /><br />
+      Notes:
+      <input type="text" v-model="patient.notes" /><br />
       <input type="submit" value="Update" />
     </form>
   </div>
@@ -28,7 +28,7 @@ export default {
   created: function () {
     axios.get("/patients/" + this.$route.params.id).then((response) => {
       console.log("patients show", response);
-      this.photo = response.data;
+      this.patient = response.data;
     });
   },
   methods: {
@@ -38,7 +38,8 @@ export default {
         .patch("/patients/" + patient.id, editPatientParams)
         .then((response) => {
           console.log("patients update", response);
-          this.$router.push("/patients");
+          this.currentPatient = {};
+          this.$router.push(`/patients/${this.patient.id}`);
         })
         .catch((error) => {
           console.log("patients update error", error.response);
