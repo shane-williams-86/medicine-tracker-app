@@ -1,10 +1,10 @@
 <template>
   <div class="patients-index">
+    <button>Add Patient</button> <br />
     <h1>All Patients</h1>
     <div v-for="patient in patients" v-bind:key="patient.id">
-      <h2>{{ patient.name }}</h2>
+      <h2>Patient: {{ patient.name }}</h2>
       <img v-bind:src="patient.image_url" v-bind:alt="patient.name" /><br />
-      <button v-on:click="SeeDetails()">See Details</button>
     </div>
   </div>
 </template>
@@ -27,7 +27,6 @@ export default {
         this.patients = response.data;
       });
     },
-    seeDetails: function () {},
   },
 };
 </script>
