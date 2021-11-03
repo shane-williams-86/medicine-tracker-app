@@ -12,19 +12,7 @@
       <img :src="drug.image_url" v-bind:alt="drug.name" />
       <button v-on:click="showDrug(drug)">Details</button>
     </div>
-    <h1>New Drug</h1>
-    <div>
-      Name:
-      <input type="text" v-model="newDrugParams.name" /><br />
-      Description:
-      <input type="text" v-model="newDrugParams.description" /><br />
-      Frequency:
-      <input type="text" v-model="newDrugParams.frequency" /><br />
-      Notes:
-      <input type="text" v-model="newDrugParams.notes" /><br />
-      Image Url:
-      <input type="text" v-model="newDrugParams.image_url" /><br />
-    </div>
+
     <dialog id="drug-details">
       <form method="dialog">
         <h1>Drug Info</h1>
@@ -53,10 +41,23 @@
           Frequency:
           <input type="text" v-model="currentDrug.frequency" />
         </p>
-        <button v-on:click="newDrug(currentDrug)">Add Drug</button>
         <button v-on:click="updateDrug(currentDrug)">Update</button>
         <button v-on:click="destroyDrug(currentDrug)">Destroy Drug</button>
         <button>Close</button>
+        <h1>New Drug</h1>
+        <div>
+          Name:
+          <input type="text" v-model="newDrugParams.name" /><br />
+          Description:
+          <input type="text" v-model="newDrugParams.description" /><br />
+          Frequency:
+          <input type="text" v-model="newDrugParams.frequency" /><br />
+          Notes:
+          <input type="text" v-model="newDrugParams.notes" /><br />
+          Image Url:
+          <input type="text" v-model="newDrugParams.image_url" /><br />
+          <button v-on:click="addDrug(currentDrug)">Add Drug</button>
+        </div>
       </form>
     </dialog>
   </div>
