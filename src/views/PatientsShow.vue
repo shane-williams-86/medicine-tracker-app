@@ -10,7 +10,20 @@
       <p>Frequency: {{ drug.frequency }}</p>
       <p>Notes: {{ drug.notes }}</p>
       <img :src="drug.image_url" v-bind:alt="drug.name" />
-      <button v-on:click="showDrug(drug)">Show More</button>
+      <button v-on:click="showDrug(drug)">Details</button>
+    </div>
+    <h1>New Drug</h1>
+    <div>
+      Name:
+      <input type="text" v-model="newDrugParams.name" /><br />
+      Description:
+      <input type="text" v-model="newDrugParams.description" /><br />
+      Frequency:
+      <input type="text" v-model="newDrugParams.frequency" /><br />
+      Notes:
+      <input type="text" v-model="newDrugParams.notes" /><br />
+      Image Url:
+      <input type="text" v-model="newDrugParams.image_url" /><br />
     </div>
     <dialog id="drug-details">
       <form method="dialog">
@@ -40,6 +53,7 @@
           Frequency:
           <input type="text" v-model="currentDrug.frequency" />
         </p>
+        <button v-on:click="newDrug(currentDrug)">Add Drug</button>
         <button v-on:click="updateDrug(currentDrug)">Update</button>
         <button v-on:click="destroyDrug(currentDrug)">Destroy Drug</button>
         <button>Close</button>
@@ -55,6 +69,7 @@ export default {
     return {
       patient: {},
       currentDrug: {},
+      newDrugParams: {},
     };
   },
   created: function () {
@@ -86,6 +101,18 @@ export default {
         var index = this.drug.indexOf(drug);
         this.drug.splice(index, 1);
       });
+    },
+    addDrug: function () {
+      axios
+        .post("/drugs", this.newDrugParams)
+        .then((response) => {
+          console.log("drugs create", response);
+          this.drugs.push(response.data);
+          this.newDrugParams = {};
+        })
+        .catch((error) => {
+          console.log("drugs create error", error.response);
+        });
     },
   },
 };
