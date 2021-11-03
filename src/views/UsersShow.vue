@@ -1,6 +1,8 @@
 <template>
   <div class="users-show">
     <h2>{{ user.name }}</h2>
+    <p>Email: {{ user.email }}</p>
+    <p>Phone Number: {{ user.phone_number }}</p>
     <img :src="user.image_url" v-bind:alt="user.name" />
     <form v-on:submit.prevent="updateUser()">
       <ul>

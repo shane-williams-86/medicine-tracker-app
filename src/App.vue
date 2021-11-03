@@ -4,11 +4,8 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/users/me">Profile</router-link> |
       <router-link v-if="!isLoggedIn()" to="/signup">Signup</router-link> |
-
       <router-link v-if="!isLoggedIn()" to="/login">Login</router-link> |
-
       <router-link v-if="isLoggedIn()" to="/logout">Logout</router-link> |
-
       <router-link to="/patients">Patients</router-link> |
       <router-link to="/patients/new">New Patient</router-link> |
     </div>

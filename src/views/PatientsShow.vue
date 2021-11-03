@@ -1,6 +1,33 @@
 <template>
   <div class="patients-show">
     <router-link :to="`/patients/${patient.id}/edit`">Edit Patient</router-link>
+    <h1>New Drug</h1>
+    <form v-on:submit.prevent="addDrug()">
+      <ul>
+        <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
+      </ul>
+      <div>
+        <label>Name:</label>
+        <input type="text" v-model="newDrugParams.name" />
+      </div>
+      <div>
+        <label>Description:</label>
+        <input type="text" v-model="newDrugParams.email" />
+      </div>
+      <div>
+        <label>Frequency:</label>
+        <input type="text" v-model="newDrugParams.phone_number" />
+      </div>
+      <div>
+        <label>Image Url:</label>
+        <input type="text" v-model="newDrugParams.image_url" />
+      </div>
+      <div>
+        <label>Notes:</label>
+        <input type="text" v-model="newDrugParams.notes" />
+      </div>
+    </form>
+    <button v-on:click="addDrug()">Add Drug</button>
     <h2>{{ patient.name }}</h2>
     <img :src="patient.image_url" v-bind:alt="patient.name" />
     <p>Patient Notes: {{ patient.notes }}</p>
@@ -10,7 +37,7 @@
       <p>Frequency: {{ drug.frequency }}</p>
       <p>Notes: {{ drug.notes }}</p>
       <img :src="drug.image_url" v-bind:alt="drug.name" />
-      <button v-on:click="showDrug(drug)">Details</button>
+      <button v-on:click="showDrug(drug)">Edit</button>
     </div>
 
     <dialog id="drug-details">
@@ -42,22 +69,8 @@
           <input type="text" v-model="currentDrug.frequency" />
         </p>
         <button v-on:click="updateDrug(currentDrug)">Update</button>
-        <button v-on:click="destroyDrug(currentDrug)">Destroy Drug</button>
+        <button v-on:click="destroyDrug()">Destroy Drug</button>
         <button>Close</button>
-        <h1>New Drug</h1>
-        <div>
-          Name:
-          <input type="text" v-model="newDrugParams.name" /><br />
-          Description:
-          <input type="text" v-model="newDrugParams.description" /><br />
-          Frequency:
-          <input type="text" v-model="newDrugParams.frequency" /><br />
-          Notes:
-          <input type="text" v-model="newDrugParams.notes" /><br />
-          Image Url:
-          <input type="text" v-model="newDrugParams.image_url" /><br />
-          <button v-on:click="addDrug(currentDrug)">Add Drug</button>
-        </div>
       </form>
     </dialog>
   </div>
@@ -96,19 +109,27 @@ export default {
           console.log("drugs update error", error.response);
         });
     },
-    destroyDrug: function (drug) {
-      axios.delete("/drugs/" + drug.id).then((response) => {
+    destroyDrug: function () {
+      axios.delete("/drugs/" + this.currentDrug.id).then((response) => {
         console.log("drugs destroy", response);
-        var index = this.drug.indexOf(drug);
-        this.drug.splice(index, 1);
+        var index = this.patient.drugs.indexOf(this.currentDrug);
+        this.patient.drugs.splice(index, 1);
       });
     },
     addDrug: function () {
+      var params = {
+        name: this.newDrugParams.name,
+        description: this.newDrugParams.description,
+        notes: this.newDrugParams.notes,
+        frequency: this.newDrugParams.frequency,
+        image_url: this.newDrugParams.image_url,
+        patient_id: this.patient.id,
+      };
       axios
-        .post("/drugs", this.newDrugParams)
+        .post("/drugs", params)
         .then((response) => {
           console.log("drugs create", response);
-          this.drugs.push(response.data);
+          this.patient.drugs.push(response.data);
           this.newDrugParams = {};
         })
         .catch((error) => {
