@@ -1,6 +1,34 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <!-- ====================================
+  ——— HEADER
+  ===================================== -->
+    <header class="header" id="pageTop">
+      <!-- Menu Zord -->
+      <nav class="nav-menuzord nav-menuzord-transparent navbar-sticky">
+        <div class="container clearfix">
+          <div id="menuzord" class="menuzord">
+            <a href="index.html" class="menuzord-logo-brand"></a>
+
+            <ul class="menuzord-menu menuzord-right">
+              <li>
+                <router-link to="/users/me">Profile</router-link>
+              </li>
+              <li>
+                <router-link to="/patients">Patients</router-link>
+              </li>
+              <li v-if="!isLoggedIn()">
+                <router-link to="/signup">Signup</router-link>
+              </li>
+              <li v-if="isLoggedIn()">
+                <router-link to="/logout">Logout</router-link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <!-- <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/users/me">Profile</router-link> |
       <router-link v-if="!isLoggedIn()" to="/signup">Signup</router-link> |
@@ -8,37 +36,11 @@
       <router-link v-if="isLoggedIn()" to="/logout">Logout</router-link> |
       <router-link to="/patients">Patients</router-link> |
       <router-link to="/patients/new">New Patient</router-link> |
-    </div>
+    </div> -->
+
     <router-view />
   </div>
 </template>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-img {
-  width: 250px;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
 
 <script>
 export default {
