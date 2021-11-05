@@ -5,40 +5,40 @@
   ===================================== -->
     <header class="header" id="pageTop">
       <!-- Menu Zord -->
-      <nav class="nav-menuzord nav-menuzord-transparent navbar-sticky">
+      <nav class="nav-menuzord navbar-sticky">
         <div class="container clearfix">
           <div id="menuzord" class="menuzord">
-            <a href="index.html" class="menuzord-logo-brand"></a>
+            <a href="index.html" class="menuzord-brand">
+              <img
+                data-src="/assets/img/logo-color-big.png"
+                src="/assets/img/logo-color-big.png"
+                alt="logo-img"
+              />
+            </a>
 
             <ul class="menuzord-menu menuzord-right">
-              <li>
-                <router-link to="/users/me">Profile</router-link>
+              <li v-if="isLoggedIn()" class="">
+                <router-link class="" to="/users/me">Profile</router-link>
               </li>
-              <li>
-                <router-link to="/patients">Patients</router-link>
+              <li v-if="isLoggedIn()" class="">
+                <router-link class="" to="/patients">Patients</router-link>
               </li>
-              <li v-if="!isLoggedIn()">
-                <router-link to="/signup">Signup</router-link>
+              <li v-if="!isLoggedIn()" class="">
+                <router-link class="" to="/signup">Signup</router-link>
               </li>
-              <li v-if="isLoggedIn()">
-                <router-link to="/logout">Logout</router-link>
+              <li v-if="!isLoggedIn()" class="">
+                <router-link class="" to="/login">Login</router-link>
+              </li>
+              <li v-if="isLoggedIn()" class="">
+                <router-link class="" to="/logout">Logout</router-link>
               </li>
             </ul>
           </div>
         </div>
       </nav>
     </header>
-    <!-- <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/users/me">Profile</router-link> |
-      <router-link v-if="!isLoggedIn()" to="/signup">Signup</router-link> |
-      <router-link v-if="!isLoggedIn()" to="/login">Login</router-link> |
-      <router-link v-if="isLoggedIn()" to="/logout">Logout</router-link> |
-      <router-link to="/patients">Patients</router-link> |
-      <router-link to="/patients/new">New Patient</router-link> |
-    </div> -->
 
-    <router-view />
+    <router-view style="padding-top: 94px" />
   </div>
 </template>
 

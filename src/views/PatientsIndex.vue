@@ -7,7 +7,7 @@
       <section class="page-title">
         <div
           class="page-title-img bg-img bg-overlay-darken"
-          style="background-image: url(assets/img/pages/page-title-bg4.jpg)"
+          style="background-image: url(/assets/img/pages/page-title-bg4.jpg)"
         >
           <div class="container">
             <div
@@ -32,6 +32,7 @@
       <!-- ====================================
 ——— TRAVEL LIST FULLWIDTH
 ===================================== -->
+      <button v-on:click="addPatient(patient)">Add Patient</button> <br />
       <section class="py-9 py-md-10">
         <div class="container">
           <div
@@ -48,7 +49,7 @@
                   <img
                     v-bind:src="patient.image_url"
                     v-bind:alt="patient.name"
-                    class="card-img-top rounded lazyestload"
+                    class="card-img-top rounded"
                   />
                   <div
                     class="card-img-overlay card-hover-overlay rounded"
@@ -66,19 +67,19 @@
                     >
                   </h3>
 
-                  <p class="mb-0">
+                  <!-- <p class="mb-0">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit,
                     sed do eiusmod tempor incididunt ut labore et dolore magna
                     aliqua. Ut enim ad minim veniam, quis nostrud exercitation
                     ullamco.
-                  </p>
+                  </p> -->
                 </div>
 
                 <div class="card-footer px-5 px-lg-0">
                   <router-link
                     :to="`/patients/${patient.id}`"
                     class="btn btn-sm btn-outline-secondary text-uppercase"
-                    >View post</router-link
+                    >View Details</router-link
                   >
                 </div>
               </div>
@@ -88,7 +89,6 @@
       </section>
     </div>
     <!-- element wrapper ends -->
-    <button v-on:click="addPatient(patient)">Add Patient</button> <br />
   </div>
 </template>
 

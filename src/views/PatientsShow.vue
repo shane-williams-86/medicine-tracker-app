@@ -1,7 +1,101 @@
 <template>
   <div class="patients-show">
-    <router-link :to="`/patients/${patient.id}/edit`">Edit Patient</router-link>
-    <h1>New Drug</h1>
+    <router-link
+      :to="`/patients/${patient.id}/edit`"
+      class="btn btn-primary mb-2"
+      >Edit Patient</router-link
+    >
+
+    <a
+      href="javascript:void(0)"
+      data-bs-toggle="modal"
+      data-bs-target="#addDrug"
+      >Add Drug</a
+    >
+    <!-- Edit Modal -->
+    <div
+      class="modal fade"
+      id="addDrug"
+      tabindex="-1"
+      role="dialog"
+      aria-label="addDrugModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header rounded">
+            <h3 class="modal-title text-uppercase font-weight-bold">
+              Add Medication
+            </h3>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+
+          <div class="modal-body">
+            <form v-on:submit.prevent="addDrug()">
+              <ul>
+                <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
+              </ul>
+              <div class="mb-3">
+                <input
+                  type="text"
+                  class="form-control bg-smoke"
+                  required=""
+                  placeholder="Name"
+                  v-model="newDrugParams.name"
+                />
+              </div>
+              <div class="mb-3">
+                <input
+                  type="text"
+                  class="form-control bg-smoke"
+                  required=""
+                  placeholder="Description"
+                  v-model="newDrugParams.description"
+                />
+              </div>
+              <div class="mb-3">
+                <input
+                  type="text"
+                  class="form-control bg-smoke"
+                  required=""
+                  placeholder="Frequency"
+                  v-model="newDrugParams.frequency"
+                />
+              </div>
+              <div class="mb-3">
+                <input
+                  type="text"
+                  class="form-control bg-smoke"
+                  required=""
+                  placeholder="Image Url"
+                  v-model="newDrugParams.image_url"
+                />
+              </div>
+              <div class="mb-3">
+                <input
+                  type="text"
+                  class="form-control bg-smoke"
+                  required=""
+                  placeholder="Notes"
+                  v-model="newDrugParams.notes"
+                />
+              </div>
+              <div class="d-grid">
+                <button type="submit" class="btn btn-primary text-uppercase">
+                  Add Drug
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <h1>New Drug</h1>
     <form v-on:submit.prevent="addDrug()">
       <ul>
         <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
@@ -12,11 +106,11 @@
       </div>
       <div>
         <label>Description:</label>
-        <input type="text" v-model="newDrugParams.email" />
+        <input type="text" v-model="newDrugParams.description" />
       </div>
       <div>
         <label>Frequency:</label>
-        <input type="text" v-model="newDrugParams.phone_number" />
+        <input type="text" v-model="newDrugParams.frequency" />
       </div>
       <div>
         <label>Image Url:</label>
@@ -26,8 +120,8 @@
         <label>Notes:</label>
         <input type="text" v-model="newDrugParams.notes" />
       </div>
-    </form>
-    <button v-on:click="addDrug()">Add Drug</button>
+    </form> -->
+    <!-- <button v-on:click="addDrug()">Add Drug</button> -->
     <h2>{{ patient.name }}</h2>
     <img :src="patient.image_url" v-bind:alt="patient.name" />
     <p>Patient Notes: {{ patient.notes }}</p>
