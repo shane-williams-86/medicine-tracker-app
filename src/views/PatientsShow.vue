@@ -1,10 +1,143 @@
 <template>
   <div class="patients-show">
-    <router-link
-      :to="`/patients/${patient.id}/edit`"
-      class="btn btn-primary mb-2"
-      >Edit Patient</router-link
-    >
+    <div class="main-wrapper blog-grid-two-col">
+      <!-- ====================================
+———	PAGE TITLE
+===================================== -->
+      <section class="page-title">
+        <div
+          class="page-title-img bg-img bg-overlay-darken"
+          style="background-image: url(/assets/img/pages/page-title-bg4.jpg)"
+        >
+          <div class="container">
+            <div
+              class="row align-items-center justify-content-center"
+              style="height: 200px"
+            >
+              <div class="col-lg-6">
+                <div class="page-title-content">
+                  <div class="title-border">
+                    <h2 class="text-uppercase text-white font-weight-bold">
+                      Patient
+                    </h2>
+                  </div>
+                  <p class="text-white mb-0"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================
+——— PATIENTS INFO
+===================================== -->
+      <section class="py-9 py-md-10">
+        <div class="container hover-profile">
+          <div class="row">
+            <div class="col-md-6 col-lg-5 col-xl-4">
+              <div class="card card-transparent mb-7">
+                <a
+                  href="blog-single-right-sidebar.html"
+                  class="position-relative"
+                >
+                  <img
+                    v-bind:src="patient.image_url"
+                    v-bind:alt="patient.name"
+                    class="card-img-top rounded"
+                  />
+                </a>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-7 col-xl-8">
+              <div class="d-flex justify-content-between align-items-baseline">
+                <div class="mb-6 mb-md-4 mb-lg-6">
+                  <h2 class="text-uppercase font-weight-bold">
+                    {{ patient.name }}
+                  </h2>
+                </div>
+
+                <div class="icon-setting">
+                  <a
+                    href="javascript:void(0)"
+                    data-bs-toggle="modal"
+                    data-bs-target="#editPatient"
+                  >
+                    <i class="fas fa-pencil-alt"></i>
+                  </a>
+                </div>
+              </div>
+
+              <ul class="list-unstyled">
+                <li class="media media-profile-list">
+                  <strong>Notes:</strong>
+
+                  <div class="media-body ms-2">
+                    <span class="text-gray-color">{{ patient.notes }}</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <!-- element wrapper ends -->
+
+    <!-- ====================================
+——— DRUGS INFO
+===================================== -->
+    <section class="py-10">
+      <div class="container">
+        <div class="row">
+          <div
+            v-for="drug in patient.drugs"
+            v-bind:key="drug.id"
+            class="col-md-6 col-lg-4 mb-5"
+          >
+            <div class="card card-hover">
+              <a
+                href="single-package-right-sidebar.html"
+                class="position-relative"
+              >
+                <img
+                  class="card-img-top"
+                  :src="drug.image_url"
+                  v-bind:alt="drug.name"
+                />
+              </a>
+
+              <div class="card-body px-4">
+                <h5>
+                  <a
+                    href="single-package-right-sidebar.html"
+                    class="card-title text-uppercase"
+                    >{{ drug.name }}</a
+                  >
+                </h5>
+                <p class="mb-5">
+                  {{ drug.notes }}
+                </p>
+                <p class="mb-5">Take {{ drug.frequency }}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <p class="text-primary">{{ drug.description }}</p>
+                  </div>
+                  <div>
+                    <button
+                      v-on:click="showDrug(drug)"
+                      class="btn btn-xs btn-outline-secondary text-uppercase"
+                    >
+                      Edit
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <a
       href="javascript:void(0)"
@@ -12,7 +145,108 @@
       data-bs-target="#addDrug"
       >Add Drug</a
     >
-    <!-- Edit Modal -->
+
+    <dialog id="drug-details">
+      <form method="dialog">
+        <h1>Drug Info</h1>
+        <p>Name: {{ currentDrug.name }}</p>
+        <p>Notes: {{ currentDrug.notes }}</p>
+        <p>Description: {{ currentDrug.description }}</p>
+        <p>Image Url: {{ currentDrug.image_url }}</p>
+        <p>Frequency: {{ currentDrug.frequency }}</p>
+        <p>
+          Name:
+          <input type="text" v-model="currentDrug.name" />
+        </p>
+        <p>
+          Notes:
+          <input type="text" v-model="currentDrug.notes" />
+        </p>
+        <p>
+          Description:
+          <input type="text" v-model="currentDrug.description" />
+        </p>
+        <p>
+          ImageUrl:
+          <input type="text" v-model="currentDrug.image_url" />
+        </p>
+        <p>
+          Frequency:
+          <input type="text" v-model="currentDrug.frequency" />
+        </p>
+        <button v-on:click="updateDrug(currentDrug)">Update</button>
+        <button v-on:click="destroyDrug()">Destroy Drug</button>
+        <button>Close</button>
+      </form>
+    </dialog>
+    <!-- Edit Patient Modal -->
+    <div
+      class="modal fade"
+      id="editPatient"
+      tabindex="-1"
+      role="dialog"
+      aria-label="editPatientModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header rounded">
+            <h3 class="modal-title text-uppercase font-weight-bold">
+              Edit Patient
+            </h3>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+
+          <div class="modal-body">
+            <form v-on:submit.prevent="updatePatient()">
+              <ul>
+                <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
+              </ul>
+              <div class="mb-3">
+                <input
+                  type="text"
+                  class="form-control bg-smoke"
+                  required=""
+                  placeholder="Name"
+                  v-model="patient.name"
+                />
+              </div>
+              <div class="mb-3">
+                <input
+                  type="text"
+                  class="form-control bg-smoke"
+                  required=""
+                  placeholder="Image URL"
+                  v-model="patient.image_url"
+                />
+              </div>
+              <div class="mb-3">
+                <input
+                  type="text"
+                  class="form-control bg-smoke"
+                  required=""
+                  placeholder="Notes"
+                  v-model="patient.notes"
+                />
+              </div>
+
+              <div class="d-grid">
+                <button type="submit" class="btn btn-primary text-uppercase">
+                  Update
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Add Drug Modal -->
+
     <div
       class="modal fade"
       id="addDrug"
@@ -95,82 +329,11 @@
         </div>
       </div>
     </div>
-    <!-- <h1>New Drug</h1>
-    <form v-on:submit.prevent="addDrug()">
-      <ul>
-        <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
-      </ul>
-      <div>
-        <label>Name:</label>
-        <input type="text" v-model="newDrugParams.name" />
-      </div>
-      <div>
-        <label>Description:</label>
-        <input type="text" v-model="newDrugParams.description" />
-      </div>
-      <div>
-        <label>Frequency:</label>
-        <input type="text" v-model="newDrugParams.frequency" />
-      </div>
-      <div>
-        <label>Image Url:</label>
-        <input type="text" v-model="newDrugParams.image_url" />
-      </div>
-      <div>
-        <label>Notes:</label>
-        <input type="text" v-model="newDrugParams.notes" />
-      </div>
-    </form> -->
-    <!-- <button v-on:click="addDrug()">Add Drug</button> -->
-    <h2>{{ patient.name }}</h2>
-    <img :src="patient.image_url" v-bind:alt="patient.name" />
-    <p>Patient Notes: {{ patient.notes }}</p>
-    <div v-for="drug in patient.drugs" v-bind:key="drug.id">
-      <p>Drug Name: {{ drug.name }}</p>
-      <p>Description: {{ drug.description }}</p>
-      <p>Frequency: {{ drug.frequency }}</p>
-      <p>Notes: {{ drug.notes }}</p>
-      <img :src="drug.image_url" v-bind:alt="drug.name" />
-      <button v-on:click="showDrug(drug)">Edit</button>
-    </div>
-
-    <dialog id="drug-details">
-      <form method="dialog">
-        <h1>Drug Info</h1>
-        <p>Name: {{ currentDrug.name }}</p>
-        <p>Notes: {{ currentDrug.notes }}</p>
-        <p>Description: {{ currentDrug.description }}</p>
-        <p>Image Url: {{ currentDrug.image_url }}</p>
-        <p>Frequency: {{ currentDrug.frequency }}</p>
-        <p>
-          Name:
-          <input type="text" v-model="currentDrug.name" />
-        </p>
-        <p>
-          Notes:
-          <input type="text" v-model="currentDrug.notes" />
-        </p>
-        <p>
-          Description:
-          <input type="text" v-model="currentDrug.description" />
-        </p>
-        <p>
-          ImageUrl:
-          <input type="text" v-model="currentDrug.image_url" />
-        </p>
-        <p>
-          Frequency:
-          <input type="text" v-model="currentDrug.frequency" />
-        </p>
-        <button v-on:click="updateDrug(currentDrug)">Update</button>
-        <button v-on:click="destroyDrug()">Destroy Drug</button>
-        <button>Close</button>
-      </form>
-    </dialog>
   </div>
 </template>
 
 <script>
+/* global $ */
 import axios from "axios";
 export default {
   data: function () {
@@ -178,6 +341,7 @@ export default {
       patient: {},
       currentDrug: {},
       newDrugParams: {},
+      errors: [],
     };
   },
   created: function () {
@@ -223,11 +387,25 @@ export default {
         .post("/drugs", params)
         .then((response) => {
           console.log("drugs create", response);
+          $("#addDrug").modal("hide");
           this.patient.drugs.push(response.data);
           this.newDrugParams = {};
         })
         .catch((error) => {
           console.log("drugs create error", error.response);
+          this.errors = error.response.data.errors;
+        });
+    },
+    updatePatient: function () {
+      axios
+        .patch("/patients/" + this.patient.id, this.patient)
+        .then((response) => {
+          console.log("patients update", response);
+          $("#editPatient").modal("hide");
+        })
+        .catch((error) => {
+          console.log("patients update error", error.response);
+          this.errors = error.response.data.errors;
         });
     },
   },

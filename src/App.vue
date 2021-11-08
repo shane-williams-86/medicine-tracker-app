@@ -38,7 +38,7 @@
       </nav>
     </header>
 
-    <router-view style="padding-top: 94px" />
+    <router-view />
   </div>
 </template>
 
