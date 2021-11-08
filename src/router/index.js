@@ -8,7 +8,6 @@ import UsersShow from "../views/UsersShow.vue";
 import PatientsIndex from "../views/PatientsIndex.vue";
 import PatientsNew from "../views/PatientsNew.vue";
 import PatientsShow from "../views/PatientsShow.vue";
-import PatientsEdit from "../views/PatientsEdit.vue";
 
 Vue.use(VueRouter);
 
@@ -29,11 +28,6 @@ const routes = [
   { path: "/patients", name: "patients-index", component: PatientsIndex },
   { path: "/patients/new", name: "patients-new", component: PatientsNew },
   { path: "/patients/:id", name: "patients-show", component: PatientsShow },
-  {
-    path: "/patients/:id/edit",
-    name: "patients-edit",
-    component: PatientsEdit,
-  },
 ];
 
 const router = new VueRouter({
