@@ -15,6 +15,16 @@
       </div>
       <input type="submit" value="Submit" />
     </form>
+    <div id="package-slider" class="owl-carousel owl-theme package-slider">
+      <div class="item">
+        <img
+          class=""
+          data-src="assets/img/holets/hotel-slider-03.jpg"
+          src="assets/img/holets/hotel-slider-03.jpg"
+          alt="image"
+        />
+      </div>
+    </div>
   </div>
 </template>
 

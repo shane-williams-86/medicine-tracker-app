@@ -12,7 +12,7 @@
           <div class="container">
             <div
               class="row align-items-center justify-content-center"
-              style="height: 200px"
+              style="height: 100px"
             >
               <div class="col-lg-6">
                 <div class="page-title-content">

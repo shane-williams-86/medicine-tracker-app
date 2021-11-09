@@ -8,7 +8,7 @@
       <nav class="nav-menuzord navbar-sticky">
         <div class="container clearfix">
           <div id="menuzord" class="menuzord">
-            <a href="index.html" class="menuzord-brand">
+            <a href="/signup" class="menuzord-brand">
               <img
                 data-src="/assets/img/logo-color-big.png"
                 src="/assets/img/logo-color-big.png"
