@@ -5,10 +5,7 @@
 ———	PAGE TITLE
 ===================================== -->
       <section class="page-title">
-        <div
-          class="page-title-img bg-img bg-overlay-darken"
-          style="background-image: url(/assets/img/pages/page-title-bg4.jpg)"
-        >
+        <div class="page-title-img bg-img bg-overlay-darken">
           <div class="container">
             <div
               class="row align-items-center justify-content-center"
@@ -61,7 +58,7 @@
                 <div class="card-body px-md-0 py-6 pt-md-0 pt-xl-6">
                   <h3 class="mb-4">
                     <a
-                      href="blog-single-right-sidebar.html"
+                      href=""
                       class="text-capitalize text-dark hover-text-primary"
                       >{{ patient.name }}</a
                     >

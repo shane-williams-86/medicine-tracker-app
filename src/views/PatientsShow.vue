@@ -5,10 +5,7 @@
 ———	PAGE TITLE
 ===================================== -->
       <section class="page-title">
-        <div
-          class="page-title-img bg-img bg-overlay-darken"
-          style="background-image: url(/assets/img/pages/page-title-bg4.jpg)"
-        >
+        <div class="page-title-img bg-img bg-overlay-darken">
           <div class="container">
             <div
               class="row align-items-center justify-content-center"
@@ -38,8 +35,9 @@
             <div class="col-md-6 col-lg-5 col-xl-4">
               <div class="card card-transparent mb-7">
                 <a
-                  href="blog-single-right-sidebar.html"
-                  class="position-relative"
+                  href="javascript:void(0)"
+                  data-bs-toggle="modal"
+                  data-bs-target="#editPatient"
                 >
                   <img
                     v-bind:src="patient.image_url"
@@ -87,7 +85,19 @@
     <!-- ====================================
 ——— DRUGS INFO
 ===================================== -->
+
     <section class="py-10">
+      <h1 class="text-uppercase font-weight-bold" style="text-align: center">
+        Patient Drugs
+      </h1>
+      <div class="" style="text-align: center">
+        <a
+          href="javascript:void(0)"
+          data-bs-toggle="modal"
+          data-bs-target="#addDrug"
+          >Add Drug</a
+        >
+      </div>
       <div class="container">
         <div class="row">
           <div
@@ -139,13 +149,6 @@
       </div>
     </section>
 
-    <a
-      href="javascript:void(0)"
-      data-bs-toggle="modal"
-      data-bs-target="#addDrug"
-      >Add Drug</a
-    >
-
     <dialog id="drug-details">
       <form method="dialog">
         <h1>Drug Info</h1>
@@ -167,7 +170,7 @@
           <input type="text" v-model="currentDrug.description" />
         </p>
         <p>
-          ImageUrl:
+          Image Url:
           <input type="text" v-model="currentDrug.image_url" />
         </p>
         <p>
@@ -237,10 +240,16 @@
 
               <div class="d-grid">
                 <button type="submit" class="btn btn-primary text-uppercase">
-                  Update
-                </button>
+                  Update</button
+                ><br />
               </div>
             </form>
+            <button
+              v-on:click="destroyPatient()"
+              class="btn btn-danger text-uppercase text-white"
+            >
+              Destroy
+            </button>
           </div>
         </div>
       </div>
@@ -361,7 +370,6 @@ export default {
         .patch("/drugs/" + drug.id, editDrugParams)
         .then((response) => {
           console.log("drugs update", response);
-          this.currentDrug = {};
         })
         .catch((error) => {
           console.log("drugs update error", error.response);
@@ -407,6 +415,13 @@ export default {
           console.log("patients update error", error.response);
           this.errors = error.response.data.errors;
         });
+    },
+    destroyPatient: function () {
+      axios.delete("/patients/" + this.patient.id).then((response) => {
+        console.log("patient destroy", response);
+        $("#editPatient").modal("hide");
+        this.$router.push("/patients");
+      });
     },
   },
 };

@@ -8,14 +8,6 @@
       <nav class="nav-menuzord navbar-sticky">
         <div class="container clearfix">
           <div id="menuzord" class="menuzord">
-            <a href="/signup" class="menuzord-brand">
-              <img
-                data-src="/assets/img/logo-color-big.png"
-                src="/assets/img/logo-color-big.png"
-                alt="logo-img"
-              />
-            </a>
-
             <ul class="menuzord-menu menuzord-right">
               <li v-if="isLoggedIn()" class="">
                 <router-link class="" to="/users/me">Profile</router-link>
