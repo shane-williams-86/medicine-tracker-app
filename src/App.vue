@@ -5,13 +5,9 @@
   ===================================== -->
     <header class="header" id="pageTop">
       <!-- Menu Zord -->
-      <nav class="nav-menuzord navbar-sticky text-align-left">
+      <nav class="nav-menuzord navbar-sticky text-align-center">
         <div class="container clearfix">
-          <h1
-            style="padding-left: 50px; padding-top: 10px; padding-bottom: 0px"
-          >
-            Medicine Tracker
-          </h1>
+          <h1 style="padding-top: 20px">Medicine Tracker</h1>
           <div id="menuzord" class="menuzord">
             <ul class="menuzord-menu menuzord-center">
               <li class="">

@@ -168,12 +168,13 @@ export default {
       });
     },
     destroyUser: function () {
-      axios.delete("/users/me").then((response) => {
-        console.log(response.data);
-        $("#editProfile").modal("hide");
-        this.$router.push("/signup");
-        // route user back to signup
-      });
+      if (confirm("Are you sure you want to delete your Account?"))
+        axios.delete("/users/me").then((response) => {
+          console.log(response.data);
+          $("#editProfile").modal("hide");
+          this.$router.push("/signup");
+          // route user back to signup
+        });
     },
   },
 };

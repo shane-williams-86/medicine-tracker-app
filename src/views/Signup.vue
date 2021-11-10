@@ -21,53 +21,56 @@
         </div>
       </div>
     </section>
-    <div class="col-md-6 col-lg-7 col-xl-4">
-      <form v-on:submit.prevent="submit()">
-        <ul>
-          <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
-        </ul>
-        <div class="form-group">
-          <input
-            type="text"
-            class="form-control border-0 bg-smoke"
-            required=""
-            placeholder="Your Name"
-            v-model="newUserParams.name"
-          />
-        </div>
+    <div class="row">
+      <div class="col-xl-4"></div>
+      <div class="col-md-6 col-lg-7 col-xl-4 mb-6">
+        <form v-on:submit.prevent="submit()">
+          <ul>
+            <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
+          </ul>
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control border-0 bg-smoke"
+              required=""
+              placeholder="Your Name"
+              v-model="newUserParams.name"
+            />
+          </div>
 
-        <div class="form-group">
-          <input
-            type="email"
-            class="form-control border-0 bg-smoke"
-            placeholder="Your Email"
-            v-model="newUserParams.email"
-          />
-        </div>
+          <div class="form-group">
+            <input
+              type="email"
+              class="form-control border-0 bg-smoke"
+              placeholder="Your Email"
+              v-model="newUserParams.email"
+            />
+          </div>
 
-        <div class="form-group">
-          <input
-            type="password"
-            class="form-control border-0 bg-smoke"
-            placeholder="Password"
-            v-model="newUserParams.password"
-          />
-        </div>
-        <div class="form-group">
-          <input
-            type="password"
-            class="form-control border-0 bg-smoke"
-            placeholder="Password"
-            v-model="newUserParams.password_confirmation"
-          />
-        </div>
+          <div class="form-group">
+            <input
+              type="password"
+              class="form-control border-0 bg-smoke"
+              placeholder="Password"
+              v-model="newUserParams.password"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="password"
+              class="form-control border-0 bg-smoke"
+              placeholder="Password"
+              v-model="newUserParams.password_confirmation"
+            />
+          </div>
 
-        <div class="d-flex justify-content-end">
-          <button type="submit" class="btn btn-primary text-uppercase">
-            Submit
-          </button>
-        </div>
-      </form>
+          <div class="d-flex justify-content-end">
+            <button type="submit" class="btn btn-primary text-uppercase">
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </template>

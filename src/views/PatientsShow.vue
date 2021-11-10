@@ -47,7 +47,7 @@
                 </a>
               </div>
             </div>
-            <div class="col-md-6 col-lg-7 col-xl-8">
+            <div class="col-md-6 col-lg-7 col-xl-2">
               <div class="d-flex justify-content-between align-items-baseline">
                 <div class="mb-6 mb-md-4 mb-lg-6">
                   <h2 class="text-uppercase font-weight-bold">
@@ -86,7 +86,7 @@
 ——— DRUGS INFO
 ===================================== -->
 
-    <section class="py-65">
+    <section class="py-75">
       <h1 class="text-uppercase font-weight-bold" style="text-align: center">
         Patient Drugs
       </h1>
@@ -95,7 +95,7 @@
           href="javascript:void(0)"
           data-bs-toggle="modal"
           data-bs-target="#addDrug"
-          ><button type="submit" class="btn btn-primary text-uppercase">
+          ><button type="submit" class="btn btn-primary text-uppercase mb-2">
             Add Drug
           </button></a
         >
@@ -108,39 +108,28 @@
             class="col-md-6 col-lg-4 mb-5"
           >
             <div class="card card-hover">
-              <a
-                href="single-package-right-sidebar.html"
-                class="position-relative"
-              >
-                <img
-                  class="card-img-top"
-                  :src="drug.image_url"
-                  v-bind:alt="drug.name"
-                />
-              </a>
+              <img
+                class="card-img-top"
+                :src="drug.image_url"
+                v-bind:alt="drug.name"
+              />
 
               <div class="card-body px-4">
-                <h5>
-                  <a
-                    href="single-package-right-sidebar.html"
-                    class="card-title text-uppercase"
-                    >{{ drug.name }}</a
-                  >
-                </h5>
+                <h5 class="font-weight-bold">{{ drug.name }}</h5>
                 <p class="mb-5">
                   {{ drug.notes }}
                 </p>
                 <p class="mb-5">Take {{ drug.frequency }}</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <div>
-                    <p class="text-primary">{{ drug.description }}</p>
+                    <p>{{ drug.description }}</p>
                   </div>
                   <div>
                     <button
                       v-on:click="showDrug(drug)"
-                      class="btn btn-xs btn-outline-secondary text-uppercase"
+                      class="btn btn-outline-primary mb-1"
                     >
-                      Edit
+                      Edit Drug
                     </button>
                   </div>
                 </div>
@@ -156,9 +145,9 @@
         <h1>Drug Info</h1>
         <p>Name: {{ currentDrug.name }}</p>
         <p>Notes: {{ currentDrug.notes }}</p>
+        <p>Frequency: {{ currentDrug.frequency }}</p>
         <p>Description: {{ currentDrug.description }}</p>
         <p>Image Url: {{ currentDrug.image_url }}</p>
-        <p>Frequency: {{ currentDrug.frequency }}</p>
         <p>
           Name:
           <input type="text" v-model="currentDrug.name" />
@@ -168,16 +157,16 @@
           <input type="text" v-model="currentDrug.notes" />
         </p>
         <p>
+          Frequency:
+          <input type="text" v-model="currentDrug.frequency" />
+        </p>
+        <p>
           Description:
           <input type="text" v-model="currentDrug.description" />
         </p>
         <p>
           Image Url:
           <input type="text" v-model="currentDrug.image_url" />
-        </p>
-        <p>
-          Frequency:
-          <input type="text" v-model="currentDrug.frequency" />
         </p>
         <button v-on:click="updateDrug(currentDrug)">Update</button>
         <button v-on:click="destroyDrug()">Destroy Drug</button>
@@ -299,8 +288,8 @@
                   type="text"
                   class="form-control bg-smoke"
                   required=""
-                  placeholder="Description"
-                  v-model="newDrugParams.description"
+                  placeholder="Notes"
+                  v-model="newDrugParams.notes"
                 />
               </div>
               <div class="mb-3">
@@ -317,8 +306,8 @@
                   type="text"
                   class="form-control bg-smoke"
                   required=""
-                  placeholder="Image Url"
-                  v-model="newDrugParams.image_url"
+                  placeholder="Description"
+                  v-model="newDrugParams.description"
                 />
               </div>
               <div class="mb-3">
@@ -326,8 +315,8 @@
                   type="text"
                   class="form-control bg-smoke"
                   required=""
-                  placeholder="Notes"
-                  v-model="newDrugParams.notes"
+                  placeholder="Image URL"
+                  v-model="newDrugParams.image_url"
                 />
               </div>
               <div class="d-grid">
@@ -378,11 +367,12 @@ export default {
         });
     },
     destroyDrug: function () {
-      axios.delete("/drugs/" + this.currentDrug.id).then((response) => {
-        console.log("drugs destroy", response);
-        var index = this.patient.drugs.indexOf(this.currentDrug);
-        this.patient.drugs.splice(index, 1);
-      });
+      if (confirm("Are you sure you want to delete this Drug?"))
+        axios.delete("/drugs/" + this.currentDrug.id).then((response) => {
+          console.log("drugs destroy", response);
+          var index = this.patient.drugs.indexOf(this.currentDrug);
+          this.patient.drugs.splice(index, 1);
+        });
     },
     addDrug: function () {
       var params = {
@@ -419,11 +409,12 @@ export default {
         });
     },
     destroyPatient: function () {
-      axios.delete("/patients/" + this.patient.id).then((response) => {
-        console.log("patient destroy", response);
-        $("#editPatient").modal("hide");
-        this.$router.push("/patients");
-      });
+      if (confirm("Are you sure you want to delete this Patient?"))
+        axios.delete("/patients/" + this.patient.id).then((response) => {
+          console.log("patient destroy", response);
+          $("#editPatient").modal("hide");
+          this.$router.push("/patients");
+        });
     },
   },
 };
