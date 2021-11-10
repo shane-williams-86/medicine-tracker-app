@@ -5,10 +5,18 @@
   ===================================== -->
     <header class="header" id="pageTop">
       <!-- Menu Zord -->
-      <nav class="nav-menuzord navbar-sticky">
+      <nav class="nav-menuzord navbar-sticky text-align-left">
         <div class="container clearfix">
+          <h1
+            style="padding-left: 50px; padding-top: 10px; padding-bottom: 0px"
+          >
+            Medicine Tracker
+          </h1>
           <div id="menuzord" class="menuzord">
-            <ul class="menuzord-menu menuzord-right">
+            <ul class="menuzord-menu menuzord-center">
+              <li class="">
+                <router-link class="" to="/">Home</router-link>
+              </li>
               <li v-if="isLoggedIn()" class="">
                 <router-link class="" to="/users/me">Profile</router-link>
               </li>

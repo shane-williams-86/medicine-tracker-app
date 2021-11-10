@@ -86,7 +86,7 @@
 ——— DRUGS INFO
 ===================================== -->
 
-    <section class="py-10">
+    <section class="py-65">
       <h1 class="text-uppercase font-weight-bold" style="text-align: center">
         Patient Drugs
       </h1>
@@ -95,7 +95,9 @@
           href="javascript:void(0)"
           data-bs-toggle="modal"
           data-bs-target="#addDrug"
-          >Add Drug</a
+          ><button type="submit" class="btn btn-primary text-uppercase">
+            Add Drug
+          </button></a
         >
       </div>
       <div class="container">

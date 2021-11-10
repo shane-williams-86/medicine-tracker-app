@@ -29,8 +29,17 @@
       <!-- ====================================
 ——— TRAVEL LIST FULLWIDTH
 ===================================== -->
-      <button v-on:click="addPatient(patient)">Add Patient</button> <br />
-      <section class="py-9 py-md-10">
+      <div class="text-align-center py-1">
+        <button
+          v-on:click="addPatient(patient)"
+          type="submit"
+          class="btn btn-primary text-uppercase"
+        >
+          Add Patient
+        </button>
+      </div>
+      <br />
+      <section class="py-3 py-md-3">
         <div class="container">
           <div
             v-for="patient in patients"

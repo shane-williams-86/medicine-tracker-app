@@ -17,7 +17,7 @@
               </div>
             </div>
 
-            <div class="col-md-6 col-lg-7 col-xl-8">
+            <div class="col-md-6 col-lg-7 col-xl-2">
               <div class="d-flex justify-content-between align-items-baseline">
                 <div class="mb-6 mb-md-4 mb-lg-6">
                   <h2 class="text-uppercase font-weight-bold">
