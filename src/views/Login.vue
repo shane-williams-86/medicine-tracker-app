@@ -19,7 +19,7 @@
 
       <div id="package-slider" class="owl-carousel owl-theme package-slider">
         <div class="item">
-          <img class="" src="assets/img/caretaker.jpeg" alt="image" />
+          <img class="" src="/assets/img/caretaker.jpeg" alt="image" />
         </div>
       </div>
     </div>

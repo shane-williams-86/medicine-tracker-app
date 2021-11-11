@@ -124,14 +124,15 @@
                   <div>
                     <p>{{ drug.description }}</p>
                   </div>
-                  <div>
-                    <button
-                      v-on:click="showDrug(drug)"
-                      class="btn btn-outline-primary mb-1"
-                    >
-                      Edit Drug
-                    </button>
-                  </div>
+
+                  <a
+                    href="javascript:void(0)"
+                    data-bs-toggle="modal"
+                    data-bs-target="#editDrug"
+                    v-on:click="currentDrug = drug"
+                  >
+                    <i class="fas fa-pencil-alt"></i>
+                  </a>
                 </div>
               </div>
             </div>
@@ -140,39 +141,6 @@
       </div>
     </section>
 
-    <dialog id="drug-details">
-      <form method="dialog">
-        <h1>Drug Info</h1>
-        <p>Name: {{ currentDrug.name }}</p>
-        <p>Notes: {{ currentDrug.notes }}</p>
-        <p>Frequency: {{ currentDrug.frequency }}</p>
-        <p>Description: {{ currentDrug.description }}</p>
-        <p>Image Url: {{ currentDrug.image_url }}</p>
-        <p>
-          Name:
-          <input type="text" v-model="currentDrug.name" />
-        </p>
-        <p>
-          Notes:
-          <input type="text" v-model="currentDrug.notes" />
-        </p>
-        <p>
-          Frequency:
-          <input type="text" v-model="currentDrug.frequency" />
-        </p>
-        <p>
-          Description:
-          <input type="text" v-model="currentDrug.description" />
-        </p>
-        <p>
-          Image Url:
-          <input type="text" v-model="currentDrug.image_url" />
-        </p>
-        <button v-on:click="updateDrug(currentDrug)">Update</button>
-        <button v-on:click="destroyDrug()">Destroy Drug</button>
-        <button>Close</button>
-      </form>
-    </dialog>
     <!-- Edit Patient Modal -->
     <div
       class="modal fade"
@@ -329,6 +297,93 @@
         </div>
       </div>
     </div>
+    <!-- Edit Drug Modal -->
+    <div
+      class="modal fade"
+      id="editDrug"
+      tabindex="-1"
+      role="dialog"
+      aria-label="editDrugModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header rounded">
+            <h3 class="modal-title text-uppercase font-weight-bold">
+              Edit Drug
+            </h3>
+          </div>
+
+          <div class="modal-body">
+            <form v-on:submit.prevent="updateDrug(currentDrug)">
+              <ul>
+                <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
+              </ul>
+              <div class="mb-3">
+                <input
+                  type="text"
+                  class="form-control bg-smoke"
+                  required=""
+                  placeholder="Name"
+                  v-model="currentDrug.name"
+                />
+              </div>
+              <div class="mb-3">
+                <input
+                  type="text"
+                  class="form-control bg-smoke"
+                  required=""
+                  placeholder="Image URL"
+                  v-model="currentDrug.notes"
+                />
+              </div>
+              <div class="mb-3">
+                <input
+                  type="text"
+                  class="form-control bg-smoke"
+                  required=""
+                  placeholder="Notes"
+                  v-model="currentDrug.frequency"
+                />
+              </div>
+              <div class="mb-3">
+                <input
+                  type="text"
+                  class="form-control bg-smoke"
+                  required=""
+                  placeholder="Notes"
+                  v-model="currentDrug.description"
+                />
+              </div>
+              <div class="mb-3">
+                <input
+                  type="text"
+                  class="form-control bg-smoke"
+                  required=""
+                  placeholder="Notes"
+                  v-model="currentDrug.image_url"
+                />
+              </div>
+
+              <div class="d-grid">
+                <button
+                  type="submit"
+                  class="btn btn-primary text-uppercase text-white"
+                >
+                  Update</button
+                ><br />
+              </div>
+            </form>
+            <button
+              v-on:click="destroyDrug()"
+              class="btn btn-danger text-uppercase text-white"
+            >
+              Destroy
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -353,7 +408,7 @@ export default {
   methods: {
     showDrug: function (drug) {
       this.currentDrug = drug;
-      document.querySelector("#drug-details").showModal();
+      document.querySelector("#editDrug").showModal();
     },
     updateDrug: function (drug) {
       var editDrugParams = drug;
@@ -361,6 +416,7 @@ export default {
         .patch("/drugs/" + drug.id, editDrugParams)
         .then((response) => {
           console.log("drugs update", response);
+          $("#editDrug").modal("hide");
         })
         .catch((error) => {
           console.log("drugs update error", error.response);
@@ -372,6 +428,7 @@ export default {
           console.log("drugs destroy", response);
           var index = this.patient.drugs.indexOf(this.currentDrug);
           this.patient.drugs.splice(index, 1);
+          $("#editDrug").modal("hide");
         });
     },
     addDrug: function () {

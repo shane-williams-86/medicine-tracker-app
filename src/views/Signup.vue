@@ -1,7 +1,12 @@
 <template>
   <div class="signup">
     <section class="page-title">
-      <div class="page-title-img bg-img bg-overlay-darken">
+      <div
+        class="page-title-img bg-img bg-overlay-darken"
+        style="
+          background-image: url(https://images.unsplash.com/photo-1508847154043-be5407fcaa5a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2574&q=80);
+        "
+      >
         <div class="container">
           <div
             class="row align-items-center justify-content-center"
