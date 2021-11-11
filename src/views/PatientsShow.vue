@@ -5,7 +5,12 @@
 ———	PAGE TITLE
 ===================================== -->
       <section class="page-title">
-        <div class="page-title-img bg-img bg-overlay-darken">
+        <div
+          class="page-title-img bg-img bg-overlay-darken"
+          style="
+            background-image: url(https://images.unsplash.com/photo-1563110493-198208247614?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTN8fHJlbGF4ZWR8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60);
+          "
+        >
           <div class="container">
             <div
               class="row align-items-center justify-content-center"

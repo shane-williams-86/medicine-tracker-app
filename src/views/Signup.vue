@@ -4,7 +4,7 @@
       <div
         class="page-title-img bg-img bg-overlay-darken"
         style="
-          background-image: url(https://images.unsplash.com/photo-1508847154043-be5407fcaa5a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2574&q=80);
+          background-image: url(https://images.unsplash.com/photo-1563110493-198208247614?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTN8fHJlbGF4ZWR8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60);
         "
       >
         <div class="container">
