@@ -1,0 +1,108 @@
+@jwt = eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE2MzY0MDM0NTR9.5qAvXkkNkIIX_ksd25nCsX_xdJNRvk21yekUzYmMlMg
+@localhost = http://localhost:3000/
+
+
+### Users create (signup)
+POST {{localhost}}/users
+Content-Type: application/json
+
+  {
+    "name": "Teresa",
+    "email": "Teresa@test.com",
+    "password": "password",
+    "password_confirmation": "password"
+  }
+
+### USERS SHOW
+GET http://localhost:3000/users/me
+Authorization: Bearer {{ jwt }}
+Content-Type: application/json
+
+### USER UPDATE
+PATCH http://localhost:3000/users/me
+Authorization: Bearer {{ jwt }}
+Content-Type: application/json
+
+{
+  
+  "image_url": "https://scontent-lga3-1.xx.fbcdn.net/v/t1.6435-9/90748411_3678329148860672_4612086841955319808_n.jpg?_nc_cat=106&ccb=1-5&_nc_sid=8bfeb9&_nc_ohc=V6ojMpEbOPoAX9lefzn&_nc_ht=scontent-lga3-1.xx&oh=4548093e6b5ca6006d0ac3a58492678b&oe=61A7BB64"
+
+}
+
+### USER DELETE
+DELETE {{localhost}}/users/me
+Content-Type: application/json
+Authorization: Bearer {{jwt}}
+
+
+### Sessions (login)
+POST {{localhost}}/sessions
+Content-Type: application/json
+
+  {
+    "email": "nuke@gmail.com",
+    "password": "password"
+  }
+
+
+### PATIENT INDEX
+GET {{localhost}}/patients
+Authorization: Bearer {{jwt}}
+Content-Type: application/json
+
+### PATIENT SHOW
+
+GET http://localhost:3000/patients/8
+Authorization: Bearer {{jwt}}
+Content-Type: application/json
+
+### PATIENT CREATE
+POST {{localhost}}/patients
+Authorization: Bearer {{jwt}}
+Content-Type: application/json
+
+{
+  "name": "Janice",
+  "notes": "Janice is 55 and prefers apple juice with her meds",
+  "image_url": ""
+}
+
+### PATIENT UPDATE
+PATCH {{localhost}}/patients/2
+Authorization: Bearer {{jwt}}
+Content-Type: application/json
+
+{
+  "name": "Alice"
+}
+
+### DRUG CREATE
+
+POST http://localhost:3000/drugs
+Authorization: Bearer {{jwt}}
+Content-Type: application/json
+
+{
+  "name": "Advil",
+  "frequency": "Every 4 hours",
+  "patient_id": 8
+}
+
+### DRUG UPDATE
+PATCH http://localhost:3000/drugs/10
+Authorization: Bearer {{ jwt }}
+Content-Type: application/json
+
+{
+  "name": "Advil",
+  "description": "Take for pain and inflammation",
+  "image_url": "https://image.shutterstock.com/image-photo/laguna-woods-ca-usa-08022018-260nw-1148582864.jpg",
+  "frequency": "every 4 hours as needed",
+  "notes": "Take with food"
+}
+
+### DRUG DESTROY
+
+DELETE {{localhost}}/drugs/9
+Content-Type: application/json
+Authorization: Bearer {{jwt}}
